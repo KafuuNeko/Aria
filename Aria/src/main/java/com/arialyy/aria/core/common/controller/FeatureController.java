@@ -17,6 +17,7 @@ package com.arialyy.aria.core.common.controller;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import com.arialyy.aria.core.AriaConfig;
@@ -168,7 +169,7 @@ public abstract class FeatureController {
    */
   private boolean checkPermission() {
 
-    if (AriaConfig.getInstance()
+    if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P && AriaConfig.getInstance()
         .getAPP()
         .checkCallingOrSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
         != PackageManager.PERMISSION_GRANTED) {
@@ -182,7 +183,7 @@ public abstract class FeatureController {
       ALog.e(TAG, "启动失败，缺少权限：Manifest.permission.INTERNET");
       return false;
     }
-    if (AriaConfig.getInstance()
+    if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P && AriaConfig.getInstance()
         .getAPP()
         .checkCallingOrSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
         != PackageManager.PERMISSION_GRANTED) {
